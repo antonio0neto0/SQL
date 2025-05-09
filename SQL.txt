@@ -1,0 +1,40 @@
+# SELECT
+
+USE company;  //para acessar o banco
+SELECT  // usado para selecionar as colunas (* pega todas)
+SELECT * ou SELECT phone, city
+FROM customers;
+
+crtl + enter //roda o codigo
+
+# Distinct
+
+SELECT DISTINCT contactFristName //ele nao pega os repitidos 
+FROM customers;
+
+# WHERE  // filtrar resultado  (<> significa diferente ou seja nao vai ter)
+
+SELECT *
+FROM customers
+WHERE state = 'CA';
+
+# IN  // filtrar varios resultados
+
+SELECT *
+FROM customers
+WHERE country in ('USA', 'Portugal', 'Australia');
+
+# BETWEEN  //entre valores  exemplo : entre 1000 e 5000
+
+SELECT *
+FROM customers
+where creditLimit between 10000 and 50000;
+
+# LIKE // encontrar por palavra que voce so sabe uma parte
+
+SELECT *
+FROM customers
+where customerName
+LIKE '%Toys%';  ou LIKE 'Dragon%'  // Nao teve % no começo pq eu sei que a palavra começa com Dragon
+
+
