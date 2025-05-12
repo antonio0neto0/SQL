@@ -72,5 +72,5 @@ SELECT avg(amount) as 'Media'
 FROM payments;
 
 -- somar Valor
-SELECT sum(amount) as 'total'
+SELECT sum(amount) as 'Total'
 FROM payments;
