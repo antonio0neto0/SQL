@@ -37,4 +37,40 @@ FROM customers
 where customerName
 LIKE '%Toys%';  ou LIKE 'Dragon%'  // Nao teve % no começo pq eu sei que a palavra começa com Dragon
 
+# Order By  // ordenar de forma crescente (ASC) e decrescente (DESC)
 
+SELECT customerName, creditLimit
+FROM customers
+ORDER BY creditLimit, customerName;  ou ORDER BY creditLimit DESC;
+//ORDER BY creditLimit DESC, customerName;
+
+# LIMIT //limitar resultados
+
+SELECT *
+FROM customers
+LIMIT 5;
+ 
+ ou
+
+SELECT *
+FROM products
+ORDER BY buyPrice
+LIMIT 5 OFFSET 5; // OFFSET pula 5 produtos
+
+# SUM - AVG - MIN - MAX
+
+-- Menor Valor
+SELECT min(amount) as 'Minimo' // minimo vai ficar como nome da coluna
+FROM payments;
+
+-- Maior Valor
+SELECT max(amount) as 'Máximo'
+FROM payments;
+
+-- Media Valor
+SELECT avg(amount) as 'Media'
+FROM payments;
+
+-- somar Valor
+SELECT sum(amount) as 'total'
+FROM payments;
