@@ -74,3 +74,47 @@ FROM payments;
 -- somar Valor
 SELECT sum(amount) as 'Total'
 FROM payments;
+
+# Count // Descubra quantos resultados são retornados de algo
+ 
+ SELECT count(*)
+ FROM customers;
+ 
+ SELECT count(distinct country)
+ FROM customers;
+
+SELECT count(*) as 'Clientes USA'
+ FROM customers
+ WHERE country = 'USA';
+
+ # GROUP by //agrupar resultados
+
+SELECT customerNumber, sum(amount) as 'Total'
+FROM payments
+GROUP BY customerNumber;
+
+SELECT customerNumber, sum(amount) as 'Total', avg(amount) as 'Media'
+FROM payments
+GROUP BY customerNumber;
+
+SELECT country, count(*)
+FROM customers
+GROUP BY country;
+
+# HAVING
+
+SELECT customerNumber, avg(amount) as 'Media'
+FROM payments
+GROUP BY customerNumber
+HAVING media > 50000;
+
+SELECT customerNumber, sum(amount) as 'Total'
+FROM payments
+GROUP BY customerNumber
+HAVING Total > 50000 and Total <100000
+ORDER BY Total;
+
+SELECT productLine, sum(quantityInStock) Total
+FROM products
+GROUP BY productLine
+HAVING Total >= 20000 and Total <= 70000;
