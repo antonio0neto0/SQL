@@ -1,0 +1,23 @@
+INNER JOIN ou so JOIN// Unir tabelas
+
+-- employeerNumber, fristName, officeCode, city, addresLine1
+
+SELECT e.employeeNumber, e.firstName, e.officeCode, o.city, o.addressLine1
+FROM employees e 
+JOIN offices o
+ON e.officeCode = o.officeCode; //sao as colunas que tem nos 2
+# USING(officeCode) // quando ascolunas das2 tabelas tem o mesmo nome
+
+-- orderNumber, customerNumber, customerName, phone
+select o.orderNumber, o.customerNumber, c.customerName, c.phone
+FROM orders o
+JOIN customers c
+ON o.customerNumber = c.customerNumber;
+
+-- customerName, customerNumber, checkNumber, amount
+
+select c.customerName, c.customerNumber, p.checkNumber, p.amount
+from customers c
+JOIN payments p
+ON c.customerNumber = p.customerNumber
+
