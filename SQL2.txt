@@ -21,3 +21,25 @@ from customers c
 JOIN payments p
 ON c.customerNumber = p.customerNumber
 
+# LEFT JOIN // ele tbm mostra os espacos vazios como null no lado esquerdo
+
+SELECT e.employeeNumber, e.firstName, c.customerNumber, c.customerName
+FROM employees e
+LEFT JOIN customers c
+ON e.employeeNumber = c.salesRepEmployeeNumber;
+
+# RIGHT JOIN
+
+SELECT o.orderNumber, c.customerNumber, c.customerName
+FROM orders o
+RIGHT JOIN customers c
+USING (customerNumber);
+
+# JOIN // multiplos JOIN
+
+SELECT o.orderNumber, c.customerNumber, e.firstName, e.jobTitle
+FROM orders o
+JOIN customers c
+USING (customerNumber)
+JOIN employees e
+ON e.employeeNumber = c.salesRepEmployeeNumber;
