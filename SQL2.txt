@@ -43,3 +43,27 @@ JOIN customers c
 USING (customerNumber)
 JOIN employees e
 ON e.employeeNumber = c.salesRepEmployeeNumber;
+
+#SELF JOIN 
+
+SELECT e.employeeNumber, e.firstName 'Chefe', er.employeeNumber, er.firstName
+FROM employees e
+JOIN employees er
+ON e.employeeNumber = er.reportsTo
+
+#outra forma de join 
+
+select c.customerNumber, c.customerName, e.firstName
+from customers c
+join employees e
+on e.employeeNumber =c.salesRepEmployeeNumber;
+
+ou
+
+select customerNumber, customerName, 
+	(select firstName
+     FROM employees
+     where employees.employeeNumber = customers.salesRepEmployeeNumber) firstName
+from customers
+order by customerNumber; 
+//em um banco grande esse roda mais rapido para saber clicar em execution plan
