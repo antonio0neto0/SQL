@@ -67,3 +67,33 @@ select customerNumber, customerName,
 from customers
 order by customerNumber; 
 //em um banco grande esse roda mais rapido para saber clicar em execution plan
+
+#subquare where
+
+select *
+FROM employees
+where officeCode in 
+     (select officeCode
+      from offices
+      where country in ('USA','France','Japan'));
+
+SELECT *
+FROM orders
+where orderNumber in (
+     select orderNumber
+     FROM orderDetails
+     where quantityOrdered >30);
+
+#UNION
+
+SELECT firstName
+from employees
+UNION  // ALL (ele coloca os repetidos)
+select contactFirstName
+FROM customers;
+
+SELECT city
+FROM customers
+UNION
+SELECT city
+FROM offices;
