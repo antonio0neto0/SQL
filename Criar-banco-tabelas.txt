@@ -18,7 +18,7 @@ data_nascimento DATE
 INSERT INTO pessoa(nome, sobrenome, idade, ativo, altura, data_nascimento) -- data é yyyy-mm-dd
 VALUES ('Antonio','Daniel',25,1,1.93,'2000-02-20');
 
-ou //para adicionar varios ao esmo tempo
+ou //para adicionar varios ao mesmo tempo
 
 INSERT INTO pessoa(nome, sobrenome, idade, ativo, altura, data_nascimento) -- data é yyyy-mm-dd
 VALUES
@@ -39,3 +39,22 @@ ADD COLUMN nota float NULL;
 
 ALTER TABLE pessoa
 DROP COLUMN nota;
+
+-- update na informaçao
+
+UPDATE pessoa
+SET ativo = 0
+WHERE pessoa_id = 5; 
+
+-- DELETE
+
+DELETE from pessoa
+WHERE pessoa_id = 5;
+
+-- limpar todos os dados da tabela 
+
+TRUNCATE pessoa;
+
+-- deletar a tabela
+
+DROP TABLE pessoa;
