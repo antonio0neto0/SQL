@@ -35,6 +35,16 @@ MODIFY COLUMN ativo BOOLEAN DEFAULT 0;
 ALTER TABLE pessoa
 ADD COLUMN nota float NULL;
 
+-- renomear coluna
+
+ALTER TABLE pessoa CHANGE nome Nome VARCHAR(80);
+
+ou
+
+ALTER TABLE eventos 
+CHANGE confirmacao Confirmado BOOLEAN DEFAULT 1;
+
+
 -- remover coluna
 
 ALTER TABLE pessoa
