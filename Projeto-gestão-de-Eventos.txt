@@ -1,0 +1,56 @@
+--criar a tabela
+/*
+evento_id - campo único do tipo inteiro para identificar cada registro na tabela, não pode ser nulo, chave primária e auto incrementado
+titulo - campo de texto que receberá o nome do evento, com o limíte máximo de 100 caracteres
+descrição - campo de texto que irá descrever sobre o que é o evento, com limíte máximo de 2000 caracteres
+data_evento - campo de data que deverá armazenar a data de início do evento
+localização - campo de texto com no máximo 200 caracteres que deverá especificar a localização do evento(ex: Rua norte Sul, 150, Belo Horizonte, Minas Gerais)
+confirmado - campo boleano que deve especificar se o evento está ou não confirmado
+*/
+
+CREATE TABLE eventos (
+	Evento_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Titulo VARCHAR(100),
+    Descricao VARCHAR(2000),
+    Data_evento DATE,
+    Localizacao VARCHAR(2000),
+    confirmacao Confirmado BOOLEAN DEFAULT 1;
+);
+
+--adicionar os dados
+
+/*
+Título: Conferência de Tecnologia
+Descrição: Um evento que aborda as últimas tendências tecnológicas.
+Data do evento: 15 de julho de 2023.
+Localização: Av. Paulista, 123, São Paulo, SP.
+Confirmado: Sim (valor 1).
+
+Título: Comemoração Clube MotoMais
+Descrição: Uma celebração para comemorar um aniversário do clubre MotoMais.
+Data do evento: 20 de agosto de 2023.
+Localização: Rua Copacabana, 456, Rio de Janeiro, RJ.
+Confirmado: Sim.
+*/
+
+INSERT INTO eventos (Titulo, Descricao, Data_evento, Localizacao, Confirmado)
+VALUES
+('Conferência de Tecnologia', 'Um evento que aborda as últimas tendências tecnológicas',
+'2020-07-15', 'Av. Paulista, 123, São Paulo, SP', 1),
+('Comemoração Clube MotoMais', 'Uma celebração para comemorar um aniversário do clubre MotoMais',
+'2023-08-20', 'Rua Copacabana, 456, Rio de Janeiro, RJ', 1);
+
+--modificaçoes
+
+-- Modifique o tamanho máximo da descricão do evento de 2000 para 2500 caracteres
+ALTER TABLE eventos
+MODIFY COLUMN descricao VARCHAR(2500);
+
+-- Adicione a coluna patrocinador, do tipo texto com no máximo 100 caracteres, com o valor padrão de 'a definir
+ALTER TABLE eventos
+ADD COLUMN Patrocinador VARCHAR(100) default 'a definir';
+
+--percebemos que não precisamos da coluna patrocinador, remova a coluna patrocinador
+da tabela eventos
+ALTER TABLE eventos
+DROP COLUMN Patrocinador;
