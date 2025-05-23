@@ -1,0 +1,61 @@
+# VIEW
+
+CREATE VIEW media_produtos_por_categoria AS
+SELECT productline, AVG(buyPrice) as average_price
+FROM products
+GROUP BY productLine;
+
+-- para poder ver 
+
+SELECT * 
+FROM company.media_produtos_por_categoria; ou FROM media_produtos_por_categoria;
+
+# variaveis SET 
+
+SET @product_code = 'S18_1749'; -- so mudar aqu, fica mais facil quando o codigo é grande, quando mudar rodar essa linha dnv
+
+SELECT productCode, SUM(quantityOrdered) Total_Vendas
+FROM orderdetails
+WHERE productCode = @product_code
+GROUP BY productCode;
+
+-- armazenar o resultado
+SELECT MAX(amount)
+FROM payments
+INTO @valor_maximo;
+
+depois usa 
+
+SELECT *
+FROM payments
+WHERE amount = @valor_maximo;
+
+#IF
+
+-- todo limite de crédito que estiver acima de 50mil é considerado "alto"
+-- e < 50mil é "baixo"
+
+SELECT customerNumber,customerName,creditLimit,
+IF(creditLimit > 50000,'Alto','Baixo') as Classificação_credito
+FROM customers;
+
+-- sintaxe 
+(condição, 'Valor se for Verdadeiro','Valor se for Falso') as nome_da_coluna
+
+-- Os Operadores de Comparação são
+> - Maior que
+>= Maior que ou igual
+< - Menor que
+<= - Menor que ou igual
+!= - Diferente de
+= - Igual
+IS NULL - É nulo
+IS NOT NULL - Não é nulo
+
+outro exemplo
+
+-- Quero que você retorne o seguinte resultado(mostrar resultado), quero o officeCode, city, phone
+-- e como quarta coluna, se o pais(country) for USA quero atribua o valor de 'local',
+-- caso contrário atribuir o valor de 'Externo'
+SELECT officeCode, city, phone, IF(country = 'USA','Local','Externo') localização
+FROM offices;
