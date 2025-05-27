@@ -59,3 +59,23 @@ outro exemplo
 -- caso contrário atribuir o valor de 'Externo'
 SELECT officeCode, city, phone, IF(country = 'USA','Local','Externo') localização
 FROM offices;
+
+# CASE 
+
+-- Queremos customerNumber, customerName, Classificacao_credito
+-- Se limite for maior que 70mil - alto
+-- Se limite estiver entrar 50mil e 70mil
+-- Caso contrário - Baixo
+SELECT customerNumber, customerName, creditLimit,
+CASE
+	WHEN creditLimit > 70000 THEN 'Alto'
+    WHEN creditLimit between 50000 and 70000 THEN 'Médio'
+	ELSE 'Baixo'
+END AS classificacao_credito
+FROM customers;
+
+#TRIGGER
+
+-- AFTER TRIGGER
+
+cfncfc
