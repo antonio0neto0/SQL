@@ -78,4 +78,45 @@ FROM customers;
 
 -- AFTER TRIGGER
 
-cfncfc
+-- Exemplo Trigger AFTER INSERT(após inserção)
+-- Situação: Queremos manter um registro dos novos clientes inseridos.
+-- Portanto, vamos criar um gatilho que insira um registro na tabela auditoria sempre que um
+-- novo cliente for adicionado.
+
+DELIMITER $$
+
+CREATE TRIGGER registrar_novo_cliente
+AFTER INSERT ON customers
+FOR EACH ROW
+BEGIN
+	INSERT INTO auditoria (customerNumber, acao, dataHora)
+    VALUES (NEW.customerNumber,'Cliente inserido', NOW());
+END; $$
+
+DELIMITER ;
+
+show triggers;  --ver se criou
+
+# BEFORE TRIGGERS
+
+-- CRIAR UM TRIGGER ANTES DE INSERÇÕES(BEFORE INSERT)
+-- QUE IMPEÇA QUE NOMES DUPLICADOS SEJAM INSERIDOS
+DELIMITER $$
+CREATE TRIGGER verificar_nome_duplicado
+BEFORE INSERT ON customers
+FOR EACH ROW
+BEGIN
+	DECLARE total INT;
+	SELECT COUNT(*) INTO total
+    FROM customers
+    WHERE customerName = NEW.customerName;
+    
+    IF total > 0 THEN
+		SIGNAL SQLSTATE '45000' -- CANCELA A OPERAÇÃO 
+			SET MESSAGE_TEXT = 'Já existe um cliente com esse nome';
+	END IF;
+END; $$
+DELIMITER ;
+
+-- apagar o trigger
+DROP TRIGGER NOME_DO_TRIGGER;
