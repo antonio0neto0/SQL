@@ -120,3 +120,45 @@ DELIMITER ;
 
 -- apagar o trigger
 DROP TRIGGER NOME_DO_TRIGGER;
+
+# stored procedure // parece com view 
+
+DELIMITER $$
+
+CREATE PROCEDURE ObterProdutosPorCategoria(IN product_line VARCHAR(50))
+BEGIN
+	SELECT * FROM products WHERE productLine = product_line;
+END; $$
+DELIMITER ;
+
+-- para chamar a procedure
+
+CALL ObterProdutosPorCategoria('Classic Cars');
+
+-- Crie uma storedque retorna produtos dentro de uma faixa de precos min e max
+DELIMITER $$
+
+CREATE PROCEDURE BUSCARPPP(IN preco_min DECIMAL(10,2), IN preco_max DECIMAL(10,2))
+BEGIN
+	SELECT * 
+    FROM products 
+    WHERE buyPrice BETWEEN preco_min and preco_max;
+END; $$
+DELIMITER ;
+
+CALL BUSCARPPP(100,500)
+
+-- outro exemplo 
+
+DELIMITER $$
+CREATE PROCEDURE ObterClientePorPais(IN pais VARCHAR(50))
+BEGIN
+	SELECT * FROM customers WHERE country = pais;
+END; $$
+DELIMITER ;
+
+CALL ObterClientePorPais('USA');
+
+# stored procedure out 
+fotos p1 e p2
+
